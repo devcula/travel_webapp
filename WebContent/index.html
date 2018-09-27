@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lets Go</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="css/LoginStyling.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/animation.css">
+<link rel="stylesheet" href="css/styling.css">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="stylesheet" href="css/caraousel.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="css/rating.css">
+<script src="js/shared/jquery.js"></script>
+<script src="js/shared/bootstrap.js"></script>
+<script src="js/shared/angular.min.js"></script>
+<script src="js/shared/angular-cookies.min.js"></script>
+<script src="js/shared/angular-route.min.js"></script>
+<script src="js/shared/angular-animate.min.js"></script>
+<script src="js/shared/swal.js"></script>
+<script src="js/user/URI.js"></script>
+<script src="js/user/Application.js"></script>
+<script src="js/user/FlightController.js"></script>
+<script src="js/user/TrainController.js"></script>
+<script src="js/user/LoginController.js"></script>
+<script src="js/user/SignUpController.js"></script>
+<script src="js/user/BusController.js"></script>
+<script src="js/user/CabController.js"></script>
+<script src="js/user/HotelController.js"></script>
+<script src="js/user/IndexController.js"></script>
+<script src="js/user/ProfileController.js"></script>
+<script src="js/user/BookingController.js"></script>
+<script src="js/user/PaymentController.js"></script>
+
+<script type="text/javascript" src="js/user/Caraousel.js"></script>
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif};
+footer {
+		position:absolute;
+		bottom:0;
+		width:100%;};
+		
+container,container-fluid {
+   height:100%;
+   min-height:100%;
+   position:relative;
+}
+
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body ng-app="Application" ng-controller="IndexController" ng-init="init()" ng-class="animation">
+       <nav class="navbar navbar-inverse" style="margin-bottom: 0px; background-color: #000" id="navBar">
+              <div class="container-fluid">
+                     <div class="navbar-header">
+                     <a href="#" class="navbar-brand" style="color:white;width: 120px;" ><!-- <span style="font-family:'Gugi'; font-size: xx-large; padding-left:20px;"> --><!-- <a href="#" class="pull-left"> --><img alt="" src="img\Dj Las K.jpg"  style="max-width:70px; margin-top: -10px; margin-bottom: -5px;" ></a>
+                           <button class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                                  <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                           </button>
+                     </div>
+                     <div class="collapse navbar-collapse" id="navbarCollapse">
+                           <ul class="nav navbar-nav">
+                                  <li class="zoom" style="width: 120px;"><a href="#/flight"><i class="material-icons">flight</i><br><span>Flight</span></a></li>
+                                  <li class="zoom" style="width: 120px;"><a href="#/train"><i class="material-icons">train</i><br><span>Train</span></a></li>
+                                  <li class="zoom" style="width: 120px;"><a href="#/bus"><i class="material-icons">directions_bus</i><br><span>Bus</span></a></li>
+                                  <li class="zoom" style="width: 120px;"><a href="#/cab"><i class="material-icons">drive_eta</i><br><span>Cab</span></a></li>
+                                  <li class="zoom" style="width: 120px;"><a href="#/hotel"><i class="material-icons">hotel</i><br><span>Hotel</span></a></li>
+                           </ul>
+                           <ul class="nav navbar-nav navbar-right">
+                           <li ng-show="!loggedIn" class="zoom" style="width: 120px;"><a href="#/login" style="color:white;"><i class="glyphicon glyphicon-log-in"></i><br>Login</a></li>
+                           <li ng-show="!loggedIn" class="zoom" style="width: 120px;"><a href="#/signup" style="color:white;"><i class="glyphicon glyphicon-pencil"></i><br>SignUp</a></li>
+                           <li ng-show="loggedIn">
+                                  <button type="button" class="userButton" data-toggle="collapse" data-target="#userMenu">
+                                         <span style="color: white; font-size: 16px; ">Welcome {{name}}</span>
+                                  </button>
+                                  <div id="userMenu" class="collapse">
+                                         <ul>
+                                                <li style="margin-left: 30px"  class="zoom"><a href="#/profile" onclick="$('.collapse').collapse('toggle');" style="text-decoration: none;"><span style="color: #FFFFFF; font-size: 12px; class="zoom"">My profile</span></a></li>
+                                                <li><li style="margin-left: 30px"  class="zoom"><a href="#/bookings" onclick="$('.collapse').collapse('toggle');" style="text-decoration: none"><span style="color: #FFFFFF; font-size: 12px;  class="zoom"">My Bookings</span></a></li></li>
+                                                <li style="margin-left: 25px"  class="zoom"><button type="button" ng-click="logout()" style="background: transparent; outline: none; border: none;"><span style="color: #FFFFFF; font-size: 12px;  class="zoom" ">Logout</span></button></li>
+                                         </ul>
+                                  </div>
+                                  </li>
+                           </ul>
+                     </div>
+              </div>
+       </nav>
+     <div>
+        <div id="rateHotelModal" class="w3-modal" style="opacity: 0.95">
+			<div class="w3-modal-content w3-animate-left w3-card-4 w3-round-xlarge" style="background-color: #262626; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:50px; padding: 0px">
+						<header class="w3-container w3-black w3-round-xlarge">
+							<span onclick="document.getElementById('rateHotelModal').style.display='none'" class="w3-button w3-display-topright w3-round-xlarge">Close</span>
+							<h2>Help us Improve!</h2>
+						</header>
+				</div>
+				<div class="w3-container">
+				<label class="myLabel" style="margin-top: 20px">Kindly rate your stay at {{hotel.hotelName}} on the scale of 1-5</label>
+				
+				<input type="number" min="1" max="5" class="form-control" ng-model="hotel.rating" style="margin-top:10px; font-size: 25px">
+				<button class="btn btn-danger btn-lg" ng-click="submitHotelRating()" style="margin-bottom:20px; margin-top:20px; outline: none; border:none;">Submit</button>
+			</div>
+		</div>
+	</div>
+        </div>
+    <div ng-view class="page page-about"></div>
+  <footer class="w3-padding-35 w3-small w3-center" id="footer" style="color: white; background-color: #0b0a0a ; line-height:2.0;">
+    <div class="w3-row-padding">
+      <div class="w3-col s4">
+        <h4>Useful Links</h4>
+        <p><a href="#/aboutUs"  style="color: white;text-decoration: none;">About us</a></p>
+        <p><a href="#/termsOfUse"  style="color: white;text-decoration: none;">Terms And Conditions</a></p>
+        <p><a href="#/maps" style="color: white;text-decoration: none;">Locate Us</a></p>
+         <p><a href="#/privacy" style="color: white;text-decoration: none;">Privacy Policy</a></p>
+      </div>
+
+      <div class="w3-col s3">
+        <h4>Our Services</h4>
+        <p><a href="#/flight" style="color: white;text-decoration: none;">Book flight</a></p>
+        <p><a href="#/train" style="color: white;text-decoration: none;">Book train</a></p>
+        <p><a href="#/cab" style="color: white;text-decoration: none;">Book cab</a></p>
+        <p><a href="#/hotel"style="color: white;text-decoration: none;">Book hotel</a></p>
+        <p><a href="#/bus" style="color: white;text-decoration: none;">Book bus</a></p>
+      </div>
+
+      <div class="w3-col s5 w3-left">
+        <h4>Address</h4>
+         <div>
+        <a style="font-size: small; color: white;text-decoration: none;" href="#/maps"><i class="fa fa-fw fa-map-marker" style="color: white;"></i> Pune, Maharastra</p>
+        <p style="font-size: small; color: white;"><i class="fa fa-fw fa-phone" style="color: white; "></i> +919068522634</p>
+        <a class="b-link fw-5" href="mailto:abhimaxfield@gmail.com" style="font-size: small; color: white; text-decoration: none;"><i class="fa fa-fw fa-envelope" style="color: white; "></i> abhimaxfield@gmail.com</a>
+        </div><br>
+  		<ul class="social-network social-circle">
+                        <li><a href="partials/comingSoon.html"  target="_blank" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/devcula"  target="_blank" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://plus.google.com/105044620757094551312"  target="_blank" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="https://in.linkedin.com/in/devcula"  target="_blank" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>				
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+

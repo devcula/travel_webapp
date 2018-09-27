@@ -1,0 +1,144 @@
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+
+html, #container {
+background: #abbaab;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+</style>
+
+
+<div class="container-fluid" ng-init="init()">
+	<div class="row">
+		<img ng-if="userForm.gender" src="img/bgprofile.png" class="img-responsive" alt="Image not found">
+		<img ng-if="userForm.gender=='Female'" src="img/femaleprofile.jpg" class="profileImage" height="150px" width="150px" alt="Image not found" >
+		<img ng-if="userForm.gender=='Male'" src="img/maleprofile.jpg" class="profileImage" height="150px" width="150px" alt="Image not found" >
+	</div>
+	<div class="row" style="position:relative ; bottom: 40px" >
+		<div class="col-md-offset-2 col-md-8" id="container">
+		<div class="table-responsive" ng-if="userForm.gender" >
+			<table class="w3-table w3-striped">
+				<tbody>
+					<tr>
+						<td>
+							<label class="myLabel">Email ID</label>
+						</td>
+						<td>
+							<input class="form-control" ng-model="userForm.emailId" class="signupInput" style="font-size: 20px; font-family: 'Raleway', Arial, Helvetica, sans-serif" disabled>
+						</td>
+					</tr>
+					<tr> 
+						<td>
+							<label class="myLabel">First Name</label>
+						</td>
+						<td>
+							<input class="form-control" ng-model="userForm.firstName" id="firstNameInput" class="signupInput" style="font-size: 20px; font-family: 'Raleway', Arial, Helvetica, sans-serif" disabled>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label class="myLabel">Last Name</label>
+						</td>
+						<td>
+							<input class="form-control" ng-model="userForm.lastName" id="lastNameInput" class="signupInput" style="font-size: 20px; font-family: 'Raleway', Arial, Helvetica, sans-serif" disabled>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label class="myLabel">Contact Number</label>
+						</td>
+						<td>
+							<input class="form-control" type="number" ng-model="userForm.contactNo" id="contactNoInput" class="signupInput" style="font-size: 20px; font-family: 'Raleway', Arial, Helvetica, sans-serif" disabled>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label class="myLabel">Date of Birth</label>
+						</td>
+						<td>
+							<input class="form-control" ng-model="userForm.dateOfBirth" class="signupInput" style="font-size: 20px; font-family: 'Raleway', Arial, Helvetica, sans-serif" disabled>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							
+						</td>
+						
+					</tr>
+					<tr>
+						<td>
+						<button class="btn btn-success zoom" style="outline: none; border:none; font-size: 22px; border-radius: 8px;" ng-click="validateFields()"> <img src="img/save.png">   &nbsp;Save Changes</button>
+						</td>
+						<td align="center" style="text-align: center">
+							<button class="btn btn-danger zoom" style="outline: none; border:none; font-size: 22px; border-radius: 8px;" ng-click="enableFields()"><img src="img/edit.png"> &nbsp;Edit profile</button>
+							<button class="btn btn-danger zoom" onclick="document.getElementById('pwdModal').style.display='block'" style="outline: none; border:none; font-size: 22px; border-radius: 8px; margin-left:20px"> <img src="img/password.png"> &nbsp;Change Password</button>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+						<td colspan="2" align="center"  style="text-align: center"><span ng-bind="message" class="myLabel"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="w3-container">
+		<div id="pwdModal" class="w3-modal" style="opacity:0.95">
+			<div class="w3-modal-content w3-animate-zoom w3-card-4 w3-round-xlarge" style="background-color: #262626; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:50px; padding: 0px">
+						<header class="w3-container w3-black w3-round-xlarge">
+							<span onclick="document.getElementById('pwdModal').style.display='none'" class="w3-button w3-display-topright w3-round-xlarge">Close</span>
+							<h2>Verify it's you.</h2>
+						</header>
+				</div>
+				<div class="w3-container">
+					<form ng-model="changePasswordForm" ng-submit="changePassword()">
+						<div class="form-group" style="margin-top:30px">
+							<label class="myLabel">Old password</label>
+							<input type="password" ng-model="changePasswordForm.oldPassword" placeholder="Enter Old Password" class="form-control" required="required">
+						</div>
+						<div class="form-group">
+							<label class="myLabel">New password</label>
+							<input type="password" ng-model="changePasswordForm.newPassword" placeholder="Enter New Password" class="form-control" required="required">
+						</div>
+						<div class="form-group">
+							<label class="myLabel">Confirm new password</label>
+							<input type="password" ng-model="confirmNewPassword" placeholder="Confirm New Password" class="form-control" required="required">
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Submit" class="btn btn-danger btn-lg" style="outline: none;  border: none;">
+						</div>
+						<div class="form-group">
+							<span ng-bind="changePasswordForm.message"></span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="profileModal" class="w3-modal" style="opacity: 0.95">
+			<div class="w3-modal-content w3-animate-zoom w3-card-4 w3-round-xlarge" style="background-color: #262626; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:50px; padding: 0px">
+						<header class="w3-container w3-black w3-round-xlarge">
+							<span onclick="document.getElementById('profileModal').style.display='none'" class="w3-button w3-display-topright w3-round-xlarge">Close</span>
+							<h2>Verify your Identity</h2>
+						</header>
+				</div>
+				<div class="w3-container">
+				<input type="password" placeholder="Enter your profile password" class="form-control" ng-model="userForm.password" style="margin-top:30px; font-size: 25px">
+				<button class="btn btn-danger btn-lg" ng-click="updateProfile()" style="margin-bottom:20px; margin-top:20px; outline: none; border:none;">Verify</button>
+			</div>
+		</div>
+	</div>
+	<div id="loadingModal" class="w3-modal">
+		<div class="w3-modal-content w3-animate-bottom w3-card-4" style="background:transparent; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:18%">
+				<figure>
+					<img src="img/loading.gif" alt="Loading...">
+					<figcaption style="font-size: 30px">Loading...</figcaption>
+				</figure>
+			</div>
+		</div>
+	</div>
+</div>

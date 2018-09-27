@@ -1,0 +1,78 @@
+
+<div class="container-fluid" style="margin-top: 30px;" ng-init="init()" id="container" >
+	<form ng-submit="login()">
+	<div class="panel panel-default"
+		style="margin-top: 10px; margin-right: 450px;margin-left: 450px;">
+		<div class="panel-body">
+  	<div class="imgcontainer"  >
+    	<img src="img/login_icon.jpg" alt="Avatar" height="100" width="100">
+  	</div>
+  	<b></b>
+
+	<div  align="center" style="margin-top: 50px;margin-right: 20px;margin-left: 20px;">
+    	
+    	<div class="form-group">
+    		<label ><span style="margin-right: 250px;">Username</span></label>
+    		<input type="email" ng-model="loginForm.emailId" class="myInput" placeholder="Enter Email" name="emailId" required="required">
+		</div>
+		<div class="form-group">
+    		<label ><span style="margin-right: 250px;">Password</span></label>
+    		<input type="password" placeholder="Enter Password" class="myInput" ng-model="loginForm.password" name="psw" required="required">
+		</div>
+		<div class="form-group">
+			<input type="checkbox" ng-model="rememberMe" ng-true-value="'Y'" ng-false-value="'N'"><span style="margin-right: 210px;margin-top: 0px;font-size: medium;"> Remember Me</span>
+			</div>
+		<span style="margin-left: 210px;margin-top: 0px;"><a onclick="document.getElementById('emailModal').style.display='block'">Forgot Password?</a></span>
+    	<button class="myButton zoom w3-red" onmouseover="document.getElementById('loginButton').style.backgroundColor='#3AAFA9'" onmouseout="document.getElementById('loginButton').style.backgroundColor='#3AAFA9'" id="loginButton" type="submit" style=" border-radius: 15px;outline: none"><span style="font-size: 18px;  font-weight:bold;">Login</span></button>
+    	
+    	<p>By logging in, you agree to <a href="partials/termsofuse.html" style="color:#3c3938;"><b>Terms of Use and Service</b></a> of Let's Go.</p>
+    <a href="#/signup" target="_self" style="color:#3c3938;"><b>New User? Click Here to Sign Up</b></a>
+		<div ng-bind="loginForm.message" class="form-group" style=" font-weight: bold"></div><br><br>
+	</div>
+	</div></div>
+</form>
+<div id="emailModal" class="w3-modal" style="opacity: 0.95">
+			<div class="w3-modal-content w3-animate-zoom w3-card-4 w3-round-xlarge" style="background-color: #262626; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:50px; padding: 0px">
+						<header class="w3-container w3-black w3-round-xlarge">
+							<span onclick="document.getElementById('emailModal').style.display='none'" class="w3-button w3-display-topright w3-round-xlarge">Close</span>
+							<h2>Please enter your Email Id</h2>
+						</header>
+				</div>
+				<div class="w3-container">
+				<input type="email" placeholder="Email ID" class="form-control" ng-model="emailId" style="margin-top:30px; font-size: 25px">
+				<button class="btn btn-danger btn-lg" ng-click="fetchQuestion()" style="margin-bottom:20px; margin-top:20px; outline: none; border:none;">Proceed</button>
+			</div>
+		</div>
+	</div>
+	<div id="answerModal" class="w3-modal" style="opacity: 0.95">
+			<div class="w3-modal-content w3-animate-bottom w3-card-4 w3-round-xlarge" style="background-color: #262626; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:50px; padding: 0px">
+						<header class="w3-container w3-black w3-round-xlarge">
+							<span onclick="document.getElementById('answerModal').style.display='none'" class="w3-button w3-display-topright w3-round-xlarge">Close</span>
+							<h2>Answer your Security Question</h2>
+						</header>
+				</div>
+				<div class="w3-container">
+				<label ng-model="emailId" style="margin-top:30px; font-size: 25px" ng-bind="question"></label>
+				<input type="text" placeholder="Answer" class="form-control" ng-model="tempAnswer" style="margin-top:10px; font-size: 25px">
+				<button class="btn btn-danger btn-lg" ng-click="verifyAnswer()" style="margin-bottom:20px; margin-top:20px; outline: none; border:none;">Submit</button>
+			</div>
+		</div>
+	</div>
+	<div id="newPasswordModal" class="w3-modal" style="opacity: 0.95">
+			<div class="w3-modal-content w3-animate-top w3-card-4 w3-round-xlarge" style="background-color: #262626; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:50px; padding: 0px">
+						<header class="w3-container w3-black w3-round-xlarge">
+							<span onclick="document.getElementById('newPasswordModal').style.display='none'" class="w3-button w3-display-topright w3-round-xlarge">Close</span>
+							<h2>Select new Password</h2>
+						</header>
+				</div>
+				<div class="w3-container">
+				<input type="password" placeholder="New Password" class="form-control" ng-model="newPassword" style="margin-top:30px; font-size: 25px">
+				<input type="password" placeholder="Confirm New Password" class="form-control" ng-model="confirmNewPassword" style="margin-top:10px; font-size: 25px">
+				<button class="btn btn-danger btn-lg" ng-click="setNewPassword()" style="margin-bottom:20px; margin-top:20px; outline: none; border:none;">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>

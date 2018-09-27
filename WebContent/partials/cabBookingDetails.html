@@ -1,0 +1,61 @@
+<div class="container-fluid" ng-init="init()">
+  <div class="table-responsive">
+    <table class="w3-table w3-striped">
+      <thead>
+      <tr>
+      <th colspan="2"><h1>Your Ride is arriving!</h1></th>
+      </tr>
+      </thead>
+      <tbody>
+      	<tr>
+      		<td>Booking ID</td>
+      		<td>{{booking.bookingId}}</td>
+      	</tr>
+      	<tr>
+      		<td>Booking Date</td>
+      		<td>{{booking.bookingDate}}</td>
+      	</tr>
+      	<tr>
+      		<td>Transaction ID</td>
+      		<td>{{booking.transactionId}}</td>
+      	</tr>
+      	<tr>
+      		<td>Booking Type</td>
+      		<td>{{booking.bookingType}}</td>
+      	</tr>
+      	<tr>
+      		<td>Cab Number</td>
+      		<td>{{booking.entityId | uppercase}}</td>
+      	</tr>
+      	<tr>
+      		<td>Cab Name</td>
+      		<td>{{booking.entityName | uppercase}}</td>
+      	</tr>
+      	<tr>
+      		<td>Driver Details</td>
+      		<td>{{booking.arrival}}</td>
+      	</tr>
+      	<tr>
+      		<td>Source</td>
+      		<td>{{booking.source}}</td>
+      	</tr>
+      	<tr>
+      		<td>Destination</td>
+      		<td>{{booking.destination}}</td>
+      	</tr>
+      	<tr>
+      		<td>Journey Date</td>
+      		<td>{{booking.journeyDate}}</td>
+      	</tr>
+      	<tr>
+      		<td>Fare</td>
+      		<td>{{booking.fare}}</td>
+      	</tr>
+      	<tr>
+      		<td>Email ID</td>
+      		<td>{{booking.userEmailId}}</td>
+      	</tr>
+      </tbody>
+    </table>
+  </div>
+</div>

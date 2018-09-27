@@ -1,0 +1,169 @@
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+html, #container {
+background: #abbaab;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+</style>
+
+<link rel="stylesheet" href="css/card.css">
+<link rel="stylesheet" href="css/hotelcard.css">
+
+<!-- Header -->
+<div class="container-fluid" id="container">
+   <div class="w3-container w3-red" style="margin-top: 20px">
+      <h2><i class="material-icons">hotel</i>&nbsp;Book Hotels</h2>
+    </div>
+    <div class="w3-container w3-white w3-padding-16" id="container">
+      <form ng-submit="checkAvailability()" ng-model="hotelForm" ng-init="init()">
+        <div class="w3-row-padding" >
+          <div class="w3-full w3-margin-bottom">
+            <label>City:</label>
+            <input list="city"  class="w3-input w3-border" placeholder="Enter City" required ng-model="hotelForm.city">
+            <datalist id="city">
+            <option value="">--Select--</option>
+            <option ng-repeat="city in cities" ng-value="city">{{city}}</option>
+            </datalist>
+          </div>
+        </div>
+        <div class="w3-row-padding"  >
+          <div class="w3-half w3-margin-bottom">
+            <label> Check In:</label>
+            <input class="w3-input w3-border" type="date"  name="checkin" required="required" ng-model="hotelForm.checkInDate">
+          </div>
+          
+          <div class="w3-half w3-margin-bottom">
+            <label> Check Out:</label>
+            <input class="w3-input w3-border" type="date"  name="checkout" required="required" ng-model="hotelForm.checkOutDate">
+          </div>
+          
+          <div class="w3-half w3-margin-bottom">
+            <label> Number of Rooms:</label>
+         	<input class="w3-input w3-border" class="form-control" type="number"  min=1 max=5 required="required" ng-model="hotelForm.quantity">
+		</div>
+		<div class="w3-half w3-margin-bottom">
+            <label> Room Type:</label>
+         	<select  class="w3-input w3-border" placeholder="Select Room Type" required ng-model="hotelForm.roomsType" required>
+            <option value="">--Select--</option>
+            <option ng-value="'standard'">Standard</option>
+            <option ng-value="'deluxe'">Deluxe</option>
+			</select>
+		</div>
+		
+		</div>
+  			
+           <div class="w3-row-padding"  >
+           <button class="w3-button w3-dark-grey" type="submit"><i class="fa fa-search w3-margin-right" ></i> Search availability</button>
+        </div>
+      </form>
+    </div>
+    <div id="loadingModal" class="w3-modal">
+		<div class="w3-modal-content w3-animate-bottom w3-card-4" style="background:transparent; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:18%">
+				<figure>
+					<img src="img/loading.gif" alt="Loading...">
+					<figcaption style="font-size: 30px">Loading...</figcaption>
+				</figure>
+			</div>
+		</div>
+	</div>
+	 <div class="container-fluid" id="hotelResults" style="visibility: hidden; margin-top: 25px">
+	 <div class="row">
+      			<div ng-repeat="obj in results" ng-click="book($index)">
+      			<div class=" col-md-4">
+      			<div class="card">
+    				<div class="image">
+      					<img ng-if="obj.hotelName=='Hotel Taj'" src="img/hotelcard1.jpg" alt="Taj"    
+            class="d-block w-full">
+            			<img ng-if="obj.hotelName=='Hotel Plaza'" src="img/hotelcard2.jpg" alt="Plaza"    
+            class="d-block w-full">
+            			<img ng-if="obj.hotelName=='IBIS'" src="img/hotelcard3.jpg" alt="IBIS"    
+            class="d-block w-full">
+            			<img ng-if="obj.hotelName=='Hotel X'" src="img/hotelcard5.jpg" alt="X"    
+            class="d-block w-full">
+            			<img ng-if="obj.hotelName=='Hotel Oberoi'" src="img/hotelcard3.jpg" alt="X"    
+            class="d-block w-full">
+            			<img ng-if="obj.hotelName=='Hotel Raddison'" src="img/hotelcard6.jpg" alt="X"    
+            class="d-block w-full">
+            			<img ng-if="obj.hotelName=='Hyatt'" src="img/hotelcard4.jpg" alt="X"    
+            class="d-block w-full">
+    				</div>
+    			<div class="details">
+      				<div class="px-1 py-1">
+    								<p class="mb-0 small font-weight-medium mb-1 text-muted lts-1px">
+      										<span class="text-uppercase">Rating : {{obj.rating}}</span><br/>
+      										*This hotel has been rated {{obj.timesRated}} times.
+    								</p>
+
+    								<h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+     									 <strong>{{obj.checkInDate}} - {{obj.checkOutDate}}</strong>
+     								</h2>
+
+    								<p class="mb-1">
+      									<b>{{obj.hotelId}}</b> - <b><span style="font-size: 24px;">{{obj.hotelName}}</span></b><br/>
+      									Room Type - <b>{{obj.roomsType}}</b><br/>
+      									Check In Time - <b>12:00 PM</b><br/>
+      									Check Out Time - <b>11:00 AM</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    								</p>
+    								
+    								<h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+     									 <strong><b>INR {{obj.price}}</b></strong>
+     								</h2>
+            
+            </div>
+    </div>
+  </div>
+      				
+            </div>
+            </div>
+            </div>
+            </div>
+            
+    <div class="w3-container">
+  		<div id="passengerModal" class="w3-modal">
+  			<div class="w3-modal-content w3-animate-right w3-card-4">
+  				<div class="w3-container" style="margin-top:50px; padding: 0px">
+  						<header class="w3-container w3-blue">
+  							<span onclick="document.getElementById('passengerModal').style.display='none'" class="w3-button w3-display-topright">Close</span>
+  							<h2>Who will stay here?</h2>
+  						</header>
+  				</div>
+  				<div class="w3-container">
+  					<form ng-model="passengerArray" ng-submit="proceedToPayment()">
+  						<div ng-repeat="passenger in passengerArray" class="form-group" style="margin-top:30px">
+  							<label class="myLabel">Customer Details</label>
+                <span>
+                  <input type="text" placeholder="Enter name" ng-model="passengerArray[$index].name" class="form-control" required="required"><br>
+                  <input type="number" placeholder="Enter age" min="1" max="100" onblur="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid age')" ng-model="passengerArray[$index].age" class="form-control" required="required"><br>
+                  <select class="form-control" ng-model="passengerArray[$index].gender" required >
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </span>
+  						</div>
+              <div class="form-group">
+                <label class="myLabel" style="font-size: 20px">
+                  <h2>Booking Summary:</h2>
+                  No. of Adults: {{hotelForm.quantity}}<br>
+                  Fare: Rs. {{baseFare}}<br>
+                  GST({{gst}}%): Rs. {{baseFare*gst/100}}<br>
+                  Total Amount: Rs. {{totalFare}}
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Proceed to Payment" class="btn btn-danger">
+              </div>
+  					</form>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+
+
+

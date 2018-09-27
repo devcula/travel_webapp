@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>Accessible 5-star rating</title>
+<style type="text/css">
+    /* 
+        Use :not with impossible condition so inputs are only hidden 
+        if pseudo selectors are supported. Otherwise the user would see
+        no inputs and no highlighted stars.
+    */
+    .rating input[type="radio"]:not(:nth-of-type(0)) {
+        /* hide visually */    
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    .rating [type="radio"]:not(:nth-of-type(0)) + label {
+        display: none;
+    }
+    
+    label[for]:hover {
+        cursor: pointer;
+    }
+    
+    .rating .stars label:before {
+        content: "★";
+    }
+    
+    .stars label {
+        color: lightgray;
+    }
+    
+    .stars label:hover {
+        text-shadow: 0 0 1px #000;
+    }
+    
+    .rating [type="radio"]:nth-of-type(1):checked ~ .stars label:nth-of-type(-n+1),
+    .rating [type="radio"]:nth-of-type(2):checked ~ .stars label:nth-of-type(-n+2),
+    .rating [type="radio"]:nth-of-type(3):checked ~ .stars label:nth-of-type(-n+3),
+    .rating [type="radio"]:nth-of-type(4):checked ~ .stars label:nth-of-type(-n+4),
+    .rating [type="radio"]:nth-of-type(5):checked ~ .stars label:nth-of-type(-n+5) {
+        color: orange;
+    }
+    
+    .rating [type="radio"]:nth-of-type(1):focus ~ .stars label:nth-of-type(1),
+    .rating [type="radio"]:nth-of-type(2):focus ~ .stars label:nth-of-type(2),
+    .rating [type="radio"]:nth-of-type(3):focus ~ .stars label:nth-of-type(3),
+    .rating [type="radio"]:nth-of-type(4):focus ~ .stars label:nth-of-type(4),
+    .rating [type="radio"]:nth-of-type(5):focus ~ .stars label:nth-of-type(5) {
+        color: darkorange;
+    }
+</style>
+</head>
+
+<body>
+    <h1>Accessible 5-star rating (HTML+CSS only)</h1>
+<form>
+    <label>demo <input placeholder="temp"></label>
+    <fieldset class="rating">
+        <legend>rating</legend>
+      
+        <input id="demo-1" type="radio" name="demo" value="1"> 
+        <label for="demo-1">1 star</label>
+        <input id="demo-2" type="radio" name="demo" value="2">
+        <label for="demo-2">2 stars</label>
+        <input id="demo-3" type="radio" name="demo" value="3">
+        <label for="demo-3">3 stars</label>
+        <input id="demo-4" type="radio" name="demo" value="4">
+        <label for="demo-4">4 stars</label>
+        <input id="demo-5" type="radio" name="demo" value="5">
+        <label for="demo-5">5 stars</label>
+        
+        <div class="stars">
+            <label for="demo-1" aria-label="1 star" title="1 star"></label>
+            <label for="demo-2" aria-label="2 stars" title="2 stars"></label>
+            <label for="demo-3" aria-label="3 stars" title="3 stars"></label>
+            <label for="demo-4" aria-label="4 stars" title="4 stars"></label>
+            <label for="demo-5" aria-label="5 stars" title="5 stars"></label>   
+        </div>
+        
+    </fieldset>
+      <label for="toggle-rating">
+          <input type="checkbox" id="toggle-rating" checked>
+          style as ★ (<code>.rating .stars</code>)
+      </label>
+    <script>
+        (function(){
+            var rating = document.querySelector('.rating');
+            var handle = document.getElementById('toggle-rating');
+            handle.onchange = function(event) {
+                rating.classList.toggle('rating', handle.checked);
+            };
+        }());
+    </script>
+</form>
+</body>
+
+</html>

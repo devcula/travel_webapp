@@ -1,0 +1,130 @@
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/form-elements.css">
+        <link rel="stylesheet" href="css/styles.css">
+        
+<style>
+html, #container {
+background: url("img/transparent2.png"), #abbaab;  /* fallback for old browsers */
+background: url("img/transparent2.png"), -webkit-linear-gradient(to bottom, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+background: url("img/transparent2.png"), linear-gradient(to bottom, #ffffff, #abbaab);
+background-repeat: no-repeat; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}</style>
+
+<div class="top-content">
+        	 <div class="inner-bg" style="margin-top: 0px; padding-top: 0px;"  id="container">
+                <div class="container-fluid" style="margin-top: 0px; padding-top: 0px;">
+	<div class="row" style="margin-top:0px" id="container">
+	 <div class="col-md-offset-1 col-md-4 " align="center" style="margin-top: 0px;" id="container">	
+                        <div class="col-sm-25 id="container">
+                        <div class="form-box">
+                        		<div class="form-top">
+	                        		<div class="form-top-left">
+	                        			<h3 style="font-weight:'bolder';">Sign up with LetsGo</h3>
+	                            		<p>Fill in the form below to get instant access:</p>
+	                        		</div>
+	                        		<div class="form-top-right">
+	                        			<i class="fa fa-pencil"></i>
+	                        		</div>
+	                            </div>
+	                              <div class="form-bottom">
+			<form role="form"  ng-model="userForm" ng-submit="register()">
+				
+			<div class="form-group">
+				                    		<label class="sr-only" >First name</label>
+				                        	<input type="text" style="height:35px;" autofocus="autofocus" minlength="2" maxlength="15" ng-model="userForm.firstName" pattern="[A-Za-z]+" 
+													onblur="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid first name.')" name="form-first-name" placeholder="First name..." class="form-first-name form-control" 
+													required="required">
+				                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" for="form-last-name">Last name</label>
+				                        	<input type="text" ng-model="userForm.lastName" style="height:35px;" autofocus="autofocus" minlength="2" maxlength="15" class="form-control signupInput" pattern="[A-Za-z]*" 
+											onblur="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid last name.')" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name"
+											required="required">
+				                        </div>
+				                      <div class="form-group">
+									       <div align="center">
+                                  <div class=row>
+                                  
+                                  <div class="col-lg-5" >
+                                         <label class="radio-inline" style="margin-left:50px;">
+                                               <input type="radio" name="gender" ng-model="userForm.gender" ng-value="'Male'" required="required"><span style=" color: white;"> Male</span>            
+                                         </label></div>
+                                         <div class="col-lg-6">
+                                         <label class="radio-inline" style="margin-left:-50px;">
+                                               <input type="radio" name="gender" ng-model="userForm.gender" ng-value="'Female'" required="required"> <span style="color: white;">Female</span>              
+                                         </label></div>
+                                  </div>
+                                  </div>
+				
+				</div>
+			<div class="form-group">
+				<label class="sr-only" for="form-email">Email</label>
+				<input type="email" style="height:35px;" ng-model="userForm.emailId" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email" required="required">
+			</div>
+			<div class="form-group">
+				 <label class="sr-only" for="form-contact-no">Contact No.</label>
+				 <input  type="tel" style="height:35px;" ng-model="userForm.contactNo"  placeholder="Contact No..." 
+				                        				class="form-about-contact-no form-control" required="required">
+			</div>
+			<div class="form-group">
+				 <label class="sr-only" for="form-dateOfBirth">Date Of Birth</label>
+				 <input  type="date"  style="height:35px;" ng-model="userForm.dateOfBirth" placeholder="Date Of Birth..." 
+				                        				class="form-about-dateOfBirth form-control" required="required">
+			</div>
+			<div class="form-group">
+				<label class="sr-only" for="form-password">Password</label>
+				<input  type="password"  style="height:35px;" ng-model="userForm.password" ng-change="confirmPasswordPattern()" id="passwordInput" placeholder="Password..." 
+				                        				class="form-about-password form-control" required="required">
+			 </div>
+			<div class="form-group">
+				  <label class="sr-only" for="form-confirmPassword">Confirm Password</label>
+				   <input  type="password"  style="height:35px;" ng-model="confirmPassword" ng-change="matchPasswords()" id="confirmPasswordInput" placeholder="Re Enter Password..." 
+				                        				class="form-about-confirmPassword form-control" required="required">
+			</div>
+				                        
+			<div class="form-group">
+				  <label class="sr-only" for="">Security Question</label>
+				  <select name="security" style="height:35px;" id="securityQuestion" ng-model="userForm.question" class="form-control" required="required">
+				            <option value="">Choose Security Question</option>
+				            <option value="1">What is your first pet's name? </option>
+				            <option value="2">In what year was your mother born? </option>
+				            <option value="3">What primary school did you attend?</option>
+				            <option value="4">In what town or city did you meet your spouse/partner?</option>
+				            <option value="5">What is the name of your favorite cousin?</option>
+				            <option value="6">What is your oldest sibling's birthday month and year?</option>
+				            <option value="7">Which phone number do you remember most from your childhood?</option>
+				             <option value="8">Which is your favorite web browser?</option>
+				             <option value="9">What was the make of your first car?</option>
+				    </select>
+			</div>
+			<div class="form-group">
+				  <label class="sr-only" for="">Answer</label>
+				   <input type="text" style="height:35px;" autofocus="autofocus" minlength="2" maxlength="15" ng-model="userForm.answer" pattern="[A-Za-z0-9]+" onblur="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a answer.')" name="" placeholder="Answer" class="form-control" 
+													required="required">
+			
+			</div>
+			<div class="form-group">
+			<input type="checkbox" required="required"><span style="color:white"> By clicking you agree to our <a href="partials/termsofuse.html" style="color:#ece0df;"><b>Terms of Use and Service</b></a> and <a href="partials/privacy.html"style="color:#ece0df;"><b>Privacy Policy</b></a></span>
+			</div>
+	
+			
+			<button type="submit" class="btn">Sign me up!</button>
+				                        
+				                    </form>
+				                    <div ng-bind="userForm.message" style="color:white"></div>
+			                    </div>
+                        	</div>
+                        
+                        </div>
+                    </div>
+             </div>
+      
+             </div>
+                    
+                </div>
+           
+            </div>
+
+      

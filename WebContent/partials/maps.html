@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html, #container {
+background: #abbaab;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+</style>
+</head>
+<body>
+<div class="w3-container w3-red" id="container" style="margin-top: 10px">
+     
+    
+<h1 style="text-align: center;color: black;">Where to find Us!</h1></div><br>
+
+
+<div id="map" style="width:900px;height:300px;border:2px solid grey;margin: auto; border-radius: 5px;box-shadow: 5px 5px #888888;"></div>
+<br>
+<br>
+<script>
+function myMap() {
+  var myCenter = new google.maps.LatLng(19.751430, 75.713835);
+  var mapCanvas = document.getElementById("map"),mapOptions;
+  var mapOptions = {center: myCenter, zoom: 12};
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  var marker = new google.maps.Marker({position:myCenter});
+  marker.setMap(map);
+  google.maps.event.addListener(marker,'click',function() {
+    var infowindow = new google.maps.InfoWindow({
+      content:"Pune, Maharastra"
+    });
+  infowindow.open(map,marker);
+  });
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMbZvCQ0RPYTLxYXq61U1Ct41lJ6qMaxI&callback=myMap"></script>
+
+
+</body>
+</html>

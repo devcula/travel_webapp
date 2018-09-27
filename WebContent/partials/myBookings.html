@@ -1,0 +1,157 @@
+<div class="container-fluid" ng-init="viewBookings()">
+<h1> <center> My Bookings</center></h1><br>
+	<div ng-if="message" class="myLabel" style="margin-top: 14%; margin-bottom:200%" >{{message}}</div>
+	<div class="table-responsive" ng-show="!message">
+		<select class="form-control" ng-model="bookingType" ng-change="changeResults()" style="margin-top: 15px; margin-bottom: 15px; font-size: 15px">
+			<option value="" selected="selected">--Select Category--</option>
+			<option value="FLIGHT">Flight</option>
+			<option value="TRAIN">Train</option>
+			<option value="BUS">Bus</option>
+			<option value="CAB">Cab</option>
+			<option value="HOTEL">Hotel</option>
+		</select>
+		<div ng-if="categoryMessage" class="myLabel" style="margin-top: 10%; margin-bottom:10%">{{categoryMessage}}</div>
+		<table class="w3-table w3-striped w3-bordered" ng-repeat="obj in bookings">
+			<thead ng-if="obj.bookingType!='HOTEL' && obj.bookingType!='CAB'">
+				<tr style="background-color: #D3D3D3">
+					<td><h5 style="font-weight: bold;">Booking Id</h5></td>
+					<td><h5 style="font-weight: bold;">Booking Date</h5></td>
+					<td><h5 style="font-weight: bold;">Transaction Id</h5></td>
+					<td><h5 style="font-weight: bold;">Booking Type</h5></td>
+					<td><h5 style="font-weight: bold;">Passengers</h5></td>
+					<td><h5 style="font-weight: bold;">Journey Date</h5></td>
+					<td><h5 style="font-weight: bold;">Source</h5></td>
+					<td><h5 style="font-weight: bold;">Destination</h5></td>
+					<td><h5 style="font-weight: bold;">More Details</h5></td>
+					<td><h5 style="font-weight: bold;">Arrival</h5></td>
+					<td><h5 style="font-weight: bold;">Departure</h5></td>
+					<td><h5 style="font-weight: bold;">Amount Paid</h5></td>
+					<td><h5 style="font-weight: bold;">FeedBack</h5></td>
+				</tr>
+			</thead>
+			<thead ng-if="obj.bookingType=='HOTEL'">
+				<tr style="background-color: #D3D3D3">
+					<td><h5 style="font-weight: bold;">Booking Id</h5></td>
+					<td><h5 style="font-weight: bold;">Booking Date</h5></td>
+					<td><h5 style="font-weight: bold;">Transaction Id</h5></td>
+					<td><h5 style="font-weight: bold;">Booking Type</h5></td>
+					<td><h5 style="font-weight: bold;">Rooms</h5></td>
+					<td><h5 style="font-weight: bold;">City</h5></td>
+					<td><h5 style="font-weight: bold;">More Details</h5></td>
+					<td><h5 style="font-weight: bold;">CheckIn Date</h5></td>
+					<td><h5 style="font-weight: bold;">CheckIn Time</h5></td>
+					<td><h5 style="font-weight: bold;">CheckOut Date</h5></td>
+					<td><h5 style="font-weight: bold;">CheckOut Time</h5></td>
+					<td><h5 style="font-weight: bold;">Amount Paid</h5></td>
+					<td><h5 style="font-weight: bold;">FeedBack</h5></td>
+				</tr>
+			</thead>
+			<thead ng-if="obj.bookingType=='CAB'">
+				<tr style="background-color: #D3D3D3">
+					<td><h5 style="font-weight: bold;">Booking Id</h5></td>
+					<td><h5 style="font-weight: bold;">Booking Date</h5></td>
+					<td><h5 style="font-weight: bold;">Transaction Id</h5></td>
+					<td><h5 style="font-weight: bold;">Booking Type</h5></td>
+					<td><h5 style="font-weight: bold;">Passengers</h5></td>
+					<td><h5 style="font-weight: bold;">Journey Date</h5></td>
+					<td><h5 style="font-weight: bold;">Source</h5></td>
+					<td><h5 style="font-weight: bold;">Destination</h5></td>
+					<td><h5 style="font-weight: bold;">More Details</h5></td>
+					<td><h5 style="font-weight: bold;">Driver Name</h5></td>
+					<td><h5 style="font-weight: bold;">Amount Paid</h5></td>
+					<td><h5 style="font-weight: bold;">FeedBack</h5></td>
+				</tr>
+			</thead>
+			<tbody ng-if="obj.bookingType!='HOTEL' && obj.bookingType!='CAB'">
+				<tr>
+					<td>{{obj.bookingId}}</td>
+					<td>{{obj.bookingDate}}</td>
+					<td>{{obj.transactionId}}</td>
+					<td>{{obj.bookingType}}</td>
+					<td>{{obj.noOfPassengers}}</td>
+					<td>{{obj.journeyDate}}</td>
+					<td>{{obj.source}}</td>
+					<td>{{obj.destination}}</td>
+					<td>{{obj.entityName}}, {{obj.entityId}}, {{obj.travelClass}}</td>
+					<td>{{obj.arrival}}</td>
+					<td>{{obj.departure}}</td>
+					<td>{{obj.fare}}</td>
+					<td><button class="btn btn-primary " style="width: 170px" ng-click="acceptFeedback($index)" ng-if="obj.feedback=='null'">Provide FeedBack</button>
+					<button class="btn btn-primary"  style="width: 170px" ng-click="showFeedback($index)" ng-if="obj.feedback!='null'">View FeedBack</button><br>
+					<button class="btn btn-danger" style="width: 170px"  ng-click="cancelBooking($index)" ng-if="obj.canBeCancelled=='Y'">Cancel Booking</button>
+					</td>
+				</tr>
+			</tbody>
+			<tbody ng-if="obj.bookingType=='CAB'">
+				<tr>
+					<td>{{obj.bookingId}}</td>
+					<td>{{obj.bookingDate}}</td>
+					<td>{{obj.transactionId}}</td>
+					<td>{{obj.bookingType}}</td>
+					<td>{{obj.noOfPassengers}}</td>
+					<td>{{obj.journeyDate}}</td>
+					<td>{{obj.source}}</td>
+					<td>{{obj.destination}}</td>
+					<td>{{obj.entityName | uppercase}}, {{obj.entityId |uppercase}}, {{obj.travelClass}}</td>
+					<td>{{obj.arrival}}</td>
+					<td>{{obj.fare}}</td>
+					<td><button class="btn btn-primary " style="width: 170px" ng-click="acceptFeedback($index)" ng-if="obj.feedback=='null'">Provide FeedBack</button>
+					<button class="btn btn-primary"  style="width: 170px" ng-click="showFeedback($index)" ng-if="obj.feedback!='null'">View FeedBack</button><br>
+					<button class="btn btn-danger" style="width: 170px"  ng-click="cancelBooking($index)" ng-if="obj.canBeCancelled=='Y'">Cancel Booking</button>
+					</td>
+				</tr>
+			</tbody>
+			<tbody ng-if="obj.bookingType=='HOTEL'">
+				<tr>
+					<td>{{obj.bookingId}}</td>
+					<td>{{obj.bookingDate}}</td>
+					<td>{{obj.transactionId}}</td>
+					<td>{{obj.bookingType}}</td>
+					<td>{{obj.noOfPassengers}}</td>
+					<td>{{obj.source}}</td>
+					<td>{{obj.entityName}}, {{obj.entityId}}, {{obj.travelClass}}</td>
+					<td>{{obj.arrival}}</td>
+					<td>12:00 PM</td>
+					<td>{{obj.departure}}</td>
+					<td>11:00 AM</td>
+					<td>{{obj.fare}}</td>
+					<td><button class="btn btn-primary" style="width: 170px" ng-click="acceptFeedback($index)" ng-if="obj.feedback=='null'">Provide FeedBack</button>
+					<button class="btn btn-primary" style="width: 170px" ng-click="showFeedback($index)" ng-if="obj.feedback!='null'">View FeedBack</button><br>
+					<button class="btn btn-danger" style="width: 170px" ng-click="cancelBooking($index)" ng-if="obj.canBeCancelled=='Y'">Cancel Booking</button>
+					<button class="btn btn-primary" style="width: 170px" ng-click="acceptRating($index)" ng-if="obj.rated=='N' && obj.canBeRated=='Y'">Rate your stay</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="feedbackModal" class="w3-modal" style="opacity: 0.95">
+			<div class="w3-modal-content w3-animate-top w3-card-4 w3-round-xlarge" style="background-color: #262626; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:50px; padding: 0px">
+						<header class="w3-container w3-black w3-round-xlarge">
+							<span onclick="document.getElementById('feedbackModal').style.display='none'" class="w3-button w3-display-topright w3-round-xlarge">Close</span>
+							<h2>Share your experience</h2>
+						</header>
+				</div>
+				<div class="w3-container">
+				<textarea placeholder="Enter your feedback" class="form-control" ng-model="feedback" style="margin-top:30px; font-size: 25px"></textarea>
+				<button class="btn btn-danger btn-lg" ng-click="saveFeedback()" style="margin-bottom:20px; margin-top:20px; outline: none; border:none;">Submit</button>
+			</div>
+		</div>
+	</div>
+	<div id="rateHotelModal2" class="w3-modal" style="opacity: 0.95">
+			<div class="w3-modal-content w3-animate-left w3-card-4 w3-round-xlarge" style="background-color: #262626; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:50px; padding: 0px">
+						<header class="w3-container w3-black w3-round-xlarge">
+							<span onclick="document.getElementById('rateHotelModal2').style.display='none'" class="w3-button w3-display-topright w3-round-xlarge">Close</span>
+							<h2>Help us Improve!</h2>
+						</header>
+				</div>
+				<div class="w3-container">
+				<label class="myLabel" style="margin-top: 20px">Kindly rate your stay on the scale of 1-5</label>
+				
+				<input type="number" min="1" max="5" class="form-control" ng-model="hotel.rating" style="margin-top:10px; font-size: 25px">
+				<button class="btn btn-danger btn-lg" ng-click="submitHotelRating()" style="margin-bottom:20px; margin-top:20px; outline: none; border:none;">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>

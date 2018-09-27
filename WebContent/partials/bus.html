@@ -1,0 +1,187 @@
+<style>
+html, #container {
+background: #abbaab;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+</style>
+
+<link rel="stylesheet" href="css/card.css">
+
+<div class="container-fluid" id="container">
+    <div class="w3-container w3-red" style="margin-top: 20px">
+      <h2><i class="material-icons">directions_bus</i>&nbsp;Book Bus Tickets </h2>
+    </div>
+    <div class="w3-container w3-white w3-padding-16" id="container">
+      <form ng-submit="checkAvailability()" ng-model="busForm">
+        <div class="w3-row-padding"  >
+          <div class="w3-half w3-margin-bottom">
+            <label>Source:</label>
+            <input list="source"  class="w3-input w3-border" placeholder="From:" required ng-model="busForm.source">
+            <datalist id="source">
+            <option ng-repeat="city in cities" ng-value="city">{{city}}</option>
+            </datalist>
+          </div>
+          <div class="w3-half">
+            <label> Destination:</label>
+            <input list="destination" class="w3-input w3-border" placeholder="To:" required ng-model="busForm.destination">
+            <datalist id="destination">
+           <option ng-repeat="city in cities" ng-value="city">{{city}}</option>
+            </datalist>
+          </div>
+        </div>
+        <div class="w3-row-padding"   >
+          <div class="w3-half w3-margin-bottom">
+            <label> Depart:</label>
+            <input class="w3-input w3-border" type="date"  name="depart" required="required" ng-model="busForm.journeyDate">
+          </div>
+          <div class="w3-half">
+            <label>No of travellers:</label>
+          <input class="w3-input w3-border" type="number"  min="1" max="6" onblur="setCustomValidity('')" oninvalid="setCustomValidity('You can book minimum 1 and maximum 6 tickets at once')"  name="noOfTravellers" required="required" ng-model="busForm.quantity">
+          </div>
+         </div>
+         <div class="w3-row-padding"   >
+          <div class="w3-half w3-margin-bottom">
+            <label> Bus Type:</label>
+         <select class="w3-input w3-border" class="form-control" required="required" ng-model="busForm.travelClass">
+         				  <option value="" selected="selected">--Select--</option>
+			  <option value="AC">AC</option>
+			  <option value="NONAC">Non AC</option>
+		</select>
+		</div>
+		
+             <div class="w3-half"><br>
+             <img src ="img/resort.png" alt="" height="32" width="32" >
+                    <label class="checkbox-inline"> 
+                    <input type="checkbox" ng-model="checkForHotels" ng-true-value="'true'" ng-false-value="'false'">Show Hotel Suggestions</label>
+             </div>
+             
+			</div><br>
+  			<button class="w3-button w3-dark-grey" type="submit"><i class="fa fa-search w3-margin-right"></i> Search availability</button>
+      		</div>
+      </form>
+      <div class="container-fluid" id="busResults" style="visibility: hidden; margin-top: 25px">
+      	<div class="row">
+      			<div ng-repeat="obj in results" ng-click="showResults($index)">
+      			<div class="col-sm-4">
+      				<div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 350px; overflow: hidden; border-radius: 1px; height:370px;">
+       						 <img src="img/buscard2.jpg" alt="Man with backpack"    
+            class="d-block w-full">
+
+  							<div class="px-1 py-1">
+
+    								<h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+     									 <strong>{{obj.arrival}} - {{obj.departure}}</strong>
+     								</h2>
+     								<p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-1.5px">
+      										*Timings are in 24-hour format.
+    								</p>
+
+    								<p class="mb-1">
+      									<b>{{obj.busNumber}}</b> - <b>{{obj.busName}}</b><br/>
+      									Source - <b>{{obj.source}}</b><br/>
+      									Destination - <b>{{obj.destination}}</b><br/>
+      									Class - <b>{{obj.travelClass}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      									Availability - <b>{{obj.availableSeats}}</b>
+    								</p>
+    								
+    								<h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+     									 <strong><b>INR {{obj.price}}</b></strong>
+     								</h2>
+
+    								
+    								
+    								</div>
+    								</div>
+      			</div>
+      			</div>
+    </div>
+    </div>
+    <div class="w3-container">
+  		<div id="passengerModal" class="w3-modal">
+  			<div class="w3-modal-content w3-animate-right w3-card-4">
+  				<div class="w3-container" style="margin-top:50px; padding: 0px">
+  						<header class="w3-container w3-blue">
+  							<span onclick="document.getElementById('passengerModal').style.display='none'" class="w3-button w3-display-topright">Close</span>
+  							<h2>Please provide us with passenger details.</h2>
+  						</header>
+  				</div>
+  				<div class="w3-container">
+  					<form ng-model="passengerArray" ng-submit="proceedToPayment()">
+  						<div ng-repeat="passenger in passengerArray" class="form-group" style="margin-top:30px;margin-left:100px;margin-right:100px;">
+  							<label class="myLabel">Passenger</label>
+                <span>
+                  <input type="text" placeholder="Enter name" ng-model="passengerArray[$index].name" class="form-control" required="required"><br>
+                  <input type="number" placeholder="Enter age" min="1" max="100" onblur="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid age')" ng-model="passengerArray[$index].age" class="form-control" required="required"><br>
+                  <select class="form-control" ng-model="passengerArray[$index].gender" required >
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </span>
+  						</div>
+              <div class="form-group">
+                <label class="myLabel" style="font-size: 20px">
+                  <h2>Fare Summary:</h2>
+                  No. of tickets: {{busForm.quantity}}<br>
+                  Base fare: Rs. {{baseFare}}<br>
+                  GST({{gst}}%): Rs. {{baseFare*gst/100}}<br>
+                  Total Fare: Rs. {{totalFare}}
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Proceed to Payment" class="btn btn-danger">
+              </div>
+  					</form>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+    <div id="loadingModal" class="w3-modal">
+		<div class="w3-modal-content w3-animate-bottom w3-card-4" style="background:transparent; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:18%">
+				<figure>
+					<img src="img/loading.gif" alt="Loading...">
+					<figcaption style="font-size: 30px">Loading...</figcaption>
+				</figure>
+			</div>
+		</div>
+	</div>
+	
+	<div ng-repeat="obj in results" id="{{$index}}" class="w3-modal" style="opacity: 0.925">
+	<div class="w3-modal-content  w3-card-4  modal-sm" style=" background-image:linear-gradient(#5F4C5C,#222845); width:350px;">
+		<div class="w3-container" style="margin-top:5px; padding: 0px">
+			<header >
+					<span ng-click="hideResults($index)" class="w3-button w3-display-topright" style="font-weight: bolder; color:#FFF">&times;</span>				
+			</header>
+			<img alt="Image not Found" src="img\transport.png" style="margin-top:20px">
+		</div>
+			<div class="w3-modal-content w3-animate-left w3-card-4 w3-round-xlarge  modal-sm" style="background:transparent; box-shadow:none; color:#FFFFFF;  font-family:AvenirNextLTPro-Regular; width:350px;">
+				<div class="w3-container" style=" padding: 0px">
+						<h1 style="margin-bottom:10px; padding: 12px">{{obj.busName}}</h1>
+						<h3>
+						<label style="font-weight: normal;font-stretch: expanded; font-family:AvenirNextLTPro-Regular;"> {{obj.busNumber}}<br>
+						 {{obj.source}}&nbsp&nbsp&nbsp&nbsp<img src="img/busarrow.png"></i>&nbsp &nbsp{{obj.destination}}<br>
+						 <br>
+						 </h3>
+						 <h4>
+						 {{obj.arrival}} &nbsp <i class="glyphicon glyphicon-option-horizontal"></i> <i class="glyphicon glyphicon-option-horizontal"></i>
+						&nbsp {{obj.departure}}<br>
+						Price: {{obj.price}}<br>
+						</label>
+						</h4>
+				</div>
+				<button class="btn btn-danger btn-lg previousButton" ng-click="previousResult($index)" style="margin-bottom:20px; margin-top:20px; outline: none; border:none; background: transparent"><span class="glyphicon glyphicon-chevron-left"></span></button>
+				<button class="btn btn-danger btn-lg nextButton" ng-click="nextResult($index)" style="margin-bottom:20px; margin-top:20px; outline: none; border:none; background: transparent"><span class="glyphicon glyphicon-chevron-right"></span></button>
+			</div>
+			<footer>
+				<button class="btn btn-primary btn-block" style="outline: none; border:none; border-radius:none" ng-click="book($index)"><h3>Book</h3></button>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+
+
+

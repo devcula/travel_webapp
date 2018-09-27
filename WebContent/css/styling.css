@@ -1,0 +1,76 @@
+
+html, body{
+	padding:0;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	max-width: 100%;
+	max-height:100%;
+	background-size:100%;
+}
+
+.row {
+	margin-right: 0px;
+	margin-left: 0px
+}
+
+.container-fluid{
+	  height:100%;
+	  display:table;
+	  width: 100%;
+	  padding: 0;
+}
+
+.bordering{
+	border-radius: 25px;
+    background: transparent;
+    padding: 8px;  
+    opacity: 0.8;
+}
+
+.myInput{
+	font-size: 18px; 
+	border-radius:20px; 
+	outline: none;
+}
+
+.myLabel{
+	font-size: 17px;
+	font-weight:bold;
+}
+
+.userButton{
+	background-color: transparent; 
+	border: none; 
+	outline: none; 
+	margin: 20px;
+}
+
+.signupInput{
+	font-size: 15px; 
+	border-radius: 9px; 
+	outline: none;
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.profileImage{
+	position: relative; 
+	bottom: 80px; 
+	border-radius: 50%; 
+	border-color: #000; 
+	border-width: 5px;
+	border-style: solid;
+}
+
+.zoom {
+    transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}

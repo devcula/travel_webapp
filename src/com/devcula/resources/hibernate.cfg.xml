@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE hibernate-configuration PUBLIC 
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- hibernate dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:8889/letsgo</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+		<!-- Automatic schema creation (begin) === -->
+		<property name="hibernate.hbm2ddl.auto">none</property>
+
+		<!-- Simple memory-only cache -->
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
+
+
+
+		<mapping class="com.devcula.entity.UserEntity" />
+		<mapping class="com.devcula.entity.FlightEntity"/>
+		<mapping class="com.devcula.entity.TrainEntity"/>
+		<mapping class="com.devcula.entity.BusEntity"/>
+		<mapping class="com.devcula.entity.PassengerEntity"/>
+		<mapping class="com.devcula.entity.BookingEntity"/>
+		<mapping class="com.devcula.entity.HotelEntity"/>
+		<mapping class="com.devcula.entity.PaymentEntity"/>
+		<mapping class="com.devcula.entity.PlaceEntity"/>
+		<mapping class="com.devcula.entity.CabEntity"/>
+		<mapping class="com.devcula.entity.CityEntity"/>
+
+	</session-factory>
+</hibernate-configuration>

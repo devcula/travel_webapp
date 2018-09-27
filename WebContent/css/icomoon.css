@@ -1,0 +1,103 @@
+/*------------------------------------------------------------------
+          					RESET STYLES
+-------------------------------------------------------------------*/
+
+.row {
+  margin: auto;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+}
+
+/*------------------------------------------------------------------
+      						SECTION STYLES
+-------------------------------------------------------------------*/
+
+section {
+  margin: 50px 0;
+}
+
+section ul li {
+  float: left;
+  height: 126px;
+  text-transform: uppercase;
+  color: steelblue;
+  width: 20.5%;
+  text-align: center;
+  cursor: pointer;
+}
+
+section li:nth-child(even) {
+  color: #ededed;
+  width: 6%;
+  font-size: 2.5em;
+  height: 63px;
+  margin-top: 31.5px;
+  line-height: 63px;
+}
+
+section span {
+  padding: 15px 0;
+  font-size: 5em;
+  display: block;
+  color: steelblue;
+  transition: all 0.2s ease-in-out;
+}
+
+section li:hover span {
+  transform: translateY(-10px);
+}
+
+.p {
+  text-align: center;
+  margin-top: 120px;
+}
+
+@font-face {
+  font-family: "icomoon";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/icomoon.eot?8pq1w");
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/icomoon.eot?#iefix8pq1w")
+      format("embedded-opentype"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/icomoon.woff?8pq1w")
+      format("woff"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/icomoon.ttf?8pq1w")
+      format("truetype"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/icomoon.svg?8pq1w#icomoon")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+ 
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pencil:before {
+  content: "\e600";
+}
+.icon-paint-format:before {
+  content: "\e601";
+}
+.icon-mug:before {
+  content: "\e602";
+}
+.icon-rocket:before {
+  content: "\e603";
+}
+.icon-enter:before {
+  content: "\e103";
+}

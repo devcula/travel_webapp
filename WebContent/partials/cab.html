@@ -1,0 +1,164 @@
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+html, #container {
+background: #abbaab;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+</style>
+
+<link rel="stylesheet" href="css/card.css">
+
+<!-- Header -->
+<div class="container-fluid" id="container">
+   <div class="w3-container w3-red" style="margin-top: 20px">
+      <h2><i class="material-icons">drive_eta</i>&nbsp;Book Cab</h2>
+    </div>
+    <div class="w3-container w3-white w3-padding-16" id="container">
+      <form ng-submit="checkAvailability()">
+      
+      
+       <div class="w3-row-padding" >
+          <div class="w3-full w3-margin-bottom">
+            <label>City:</label>
+            <input list="city"  class="w3-input w3-border" placeholder="Enter City" required ng-model="cabForm.city" ng-change="fetchPlaces()">
+            <datalist id="city">
+            <option value="" selected="selected">--Select--</option>
+            <option ng-repeat="city in cities" ng-value="city" >{{city}}</option>
+            </datalist>
+          </div>
+        </div>
+      
+        <div class="w3-row-padding"  >
+        
+          <div class="w3-half w3-margin-bottom">
+            <label>Source:</label>
+            <input list="source"  class="w3-input w3-border" placeholder="From:" required ng-model="cabForm.source">
+            <datalist id="source">
+            <option value="" selected="selected">--Select--</option>
+            <option ng-repeat="place in places" ng-value="place">{{place}}</option>
+            </datalist>
+          </div>
+          <div class="w3-half">
+            <label> Destination:</label>
+            <input list="destination" class="w3-input w3-border" placeholder="To:" required ng-model="cabForm.destination">
+            <datalist id="destination">
+            <option value="" selected="selected">--Select--</option>
+            <option ng-repeat="place in places" ng-value="place">{{place}}</option>
+            </datalist>
+          </div>
+        </div>
+        
+        
+        <div class="w3-row-padding"  >
+          <div class="w3-half w3-margin-bottom">
+            <label> Date:</label>
+            <input class="w3-input w3-border" type="date"  name="depart" required="required" ng-model="cabForm.journeyDate">
+          </div>
+          
+          <div class="w3-half ">
+            <label> Car Type:</label>
+         <select class="w3-input w3-border" class="form-control" required="required" ng-model="cabForm.carType">
+			  <option value="" selected="selected">--Select--</option>
+			  <option value="hatchback">Mini</option>
+			  <option value="suv">SUV</option>
+			  <option value="sedan">Sedan</option>
+		</select>
+		</div>
+		</div>
+  			
+           <div class="w3-row-padding"  >
+           <button class="w3-button w3-dark-grey" type="submit"><i class="fa fa-search w3-margin-right" ></i> Search availability</button>
+        </div>
+        
+        
+        
+       
+      </form>
+    </div>
+    <div class="container-fluid" id="cabResults" style="visibility: hidden; margin-top: 25px">
+      	<div class= row>
+      			<div ng-repeat="obj in results" ng-click="book($index)">
+      			<div class="col-sm-4">
+      			<div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 350px; overflow: hidden; border-radius: 1px; height:370px;">
+       						 <img src="img/cabcard.png" alt="Man with backpack"    
+            class="d-block w-full">
+
+  							<div class="px-1 py-1">
+
+    								<h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+     									 <b>{{obj.cabNumber | uppercase}}</b> - <b>{{obj.cabName | uppercase}}</b><br/>
+     								</h2>
+     							
+    								<p class="mb-1">
+      									
+      									From - <b>{{obj.source}}</b><br/>
+      									To - <b>{{obj.destination}}</b><br/>
+      									Type - <b>{{obj.carType}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+      									Date of Journey - <b>{{obj.journeyDate}}</b>
+    								</p>
+    								
+    								<h2 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+     									 <strong><b>INR {{obj.price}}</b></strong>
+     								</h2>
+     								
+     								<p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-1.5px">
+      										*Prices may vary at peak hours.
+    								</p>
+
+</div></div></div></div></div></div>
+
+    <div class="w3-container">
+  		<div id="passengerModal" class="w3-modal">
+  			<div class="w3-modal-content w3-animate-right w3-card-4">
+  				<div class="w3-container" style="margin-top:50px; padding: 0px">
+  						<header class="w3-container w3-blue">
+  							<span onclick="document.getElementById('passengerModal').style.display='none'" class="w3-button w3-display-topright">Close</span>
+  							<h2>Please provide us with passenger details.</h2>
+  						</header>
+  				</div>
+  				<div class="w3-container">
+  					<form ng-model="passengerArray" ng-submit="proceedToPayment()">
+  						<div ng-repeat="passenger in passengerArray" class="form-group" style="margin-top:30px">
+  							<label class="myLabel">Passenger</label>
+                <span>
+                  <input type="text" placeholder="Enter name" ng-model="passengerArray[$index].name" class="form-control" required="required"><br>
+                  <input type="number" placeholder="Enter age" min="1" max="100" onblur="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid age')" ng-model="passengerArray[$index].age" class="form-control" required="required"><br>
+                  <select class="form-control" ng-model="passengerArray[$index].gender" required >
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </span>
+  						</div>
+              <div class="form-group">
+                <label class="myLabel" style="font-size: 20px">
+                  <h2>Fare Summary:</h2>
+                  Fare: Rs. {{baseFare}}<br>
+                  GST({{gst}}%): Rs. {{baseFare*gst/100}}<br>
+                  Total Fare: Rs. {{totalFare}}
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Proceed to Payment" class="btn btn-danger">
+              </div>
+  					</form>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+    <div id="loadingModal" class="w3-modal">
+		<div class="w3-modal-content w3-animate-bottom w3-card-4" style="background:transparent; color:#FFFFFF; ">
+				<div class="w3-container" style="margin-top:18%">
+				<figure>
+					<img src="img/loading.gif" alt="Loading...">
+					<figcaption style="font-size: 30px">Loading...</figcaption>
+				</figure>
+			</div>
+		</div>
+	</div>
+  </div>
+
+
+
