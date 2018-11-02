@@ -13,7 +13,7 @@ public class DataInit {
 	public static void insertFlight(){
 		String sql="Update flight set bookingData=?";
 		try{
-			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),"root","root");
+			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),Factory.getDbUsername(),Factory.getDbPassword());
 			PreparedStatement ps=connection.prepareStatement(sql);
 			ps.setString(1, FlightJson.generateData(2));
 			ps.executeUpdate();
@@ -28,7 +28,7 @@ public class DataInit {
 	public static void insertTrain(){
 		String sql="Update train set bookingData=?";
 		try{
-			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),"root","root");
+			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),Factory.getDbUsername(),Factory.getDbPassword());
 			PreparedStatement ps=connection.prepareStatement(sql);
 			ps.setString(1, TrainJson.generateData(2));
 			ps.executeUpdate();
@@ -43,7 +43,7 @@ public class DataInit {
 	public static void insertBus(){
 		String sql="Update bus set bookingData=?";
 		try{
-			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),"root","root");
+			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),Factory.getDbUsername(),Factory.getDbPassword());
 			PreparedStatement ps=connection.prepareStatement(sql);
 			ps.setString(1, BusJson.generateData(2));
 			ps.executeUpdate();
@@ -58,7 +58,7 @@ public class DataInit {
 	public static void insertHotel(){
 		String sql="Update hotel set bookingData=?";
 		try{
-			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),"root","root");
+			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),Factory.getDbUsername(),Factory.getDbPassword());
 			PreparedStatement ps=connection.prepareStatement(sql);
 			ps.setString(1, HotelJson.generateData(2));
 			ps.executeUpdate();
@@ -72,7 +72,7 @@ public class DataInit {
 	public static void insertCab(){
 		String sql="Update cab set bookingData=?";
 		try{
-			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),"root","root");
+			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),Factory.getDbUsername(),Factory.getDbPassword());
 			PreparedStatement ps=connection.prepareStatement(sql);
 			ps.setString(1, CabJson.generateData(2));
 			ps.executeUpdate();
@@ -107,7 +107,7 @@ public class DataInit {
 //			data=FlightJson.generateData(2);
 //			System.out.println(data);
 //			System.out.println(data.length());
-			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),"root","root");
+			Connection connection=DriverManager.getConnection(Factory.getConnectionString(),Factory.getDbUsername(),Factory.getDbPassword());
 			PreparedStatement ps=connection.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())

@@ -33,6 +33,14 @@ public class Factory {
 		return "jdbc:mysql://localhost:8889/letsgo";
 	}
 
+	public static String getDbUsername(){
+		return "root";
+	}
+
+	public static String getDbPassword(){
+		return "root";
+	}
+
 	public static CityService createCityService(){
 		return new CityService();
 	}

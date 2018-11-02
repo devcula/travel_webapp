@@ -30,9 +30,12 @@
 
 5. Update the same connection url in getConnectionString() method of Factory class present in src/com/devcula/resources.
 
-6. After successfully completing above steps, run the DataInit class as a standalone java program. DataInit class is also present in src/com/devcula/resources.
+6. Update your database credentials i.e. username and password into hibernate.cfg.xml file and 
+also in getDbUsername() and getDbPassword() methods of factory class.
 
-7. Once all the steps are completed, host the project on a web server like Apache Tomcat or IBM Websphere and run index.html present in WebContent folder.
+7. After successfully completing above steps, run the DataInit class as a standalone java program. DataInit class is also present in src/com/devcula/resources.
+
+8. Once all the steps are completed, host the project on a web server like Apache Tomcat or IBM Websphere and run index.html present in WebContent folder.
 
 NOTE: If on launching index.html, you get "Website Under maintenance", it means one of more steps failed to execute.
       I didn't have time to create admin panel so if anyone is interested to contribute, they are more than welcome. Just ping me.

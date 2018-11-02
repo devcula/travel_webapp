@@ -1,15 +1,15 @@
-drop table user_table cascade constraints;
+drop table user_table;
 
 create table user_table(
-	emailId VARCHAR2(30) constraint user_pk PRIMARY KEY,
-	firstName VARCHAR2(15) NOT NULL,
-	lastName VARCHAR2(15) ,
-	contactNo NUMBER(10) not null,
+	emailId VARCHAR(30) PRIMARY KEY,
+	firstName VARCHAR(15) NOT NULL,
+	lastName VARCHAR(15) ,
+	contactNo BIGINT not null,
 	dateOfBirth date not null,
-	gender varchar2(6) not null,
-	password varchar2(80) not null,
-	question varchar2(100) NOT NULL,
-	answer varchar2(50) NOT NULL);
+	gender varchar(6) not null,
+	password varchar(80) not null,
+	question varchar(100) NOT NULL,
+	answer varchar(50) NOT NULL);
 	
 Commit;
 
