@@ -36,8 +36,8 @@ public class LetsGoAPI {
 		try{
 			System.out.println(receivedData);
 			user=JSONParser.fromJson(receivedData, User.class);
-			//Gson gson=new Gson();
-			//Type type=new TypeToken<User>() {}.getType();
+			Gson gson=new Gson();
+			Type type=new TypeToken<User>() {}.getType();
 			user=gson.fromJson(receivedData, type);
 			String successMessage=Factory.createUserService().registerUser(user);
 			user=new User();
